@@ -1,0 +1,55 @@
+#spring配置
+spring: 
+  datasource: #数据库配置
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: admin
+    initialSize: 3        ##初始化连接数, 默认: 10
+    maxActive: 10     ##连接池中保留的最大连接数, 默认: 100
+    minIdle: 8          ##最小空闲连接数量, 默认: initialSize
+    maxIdle: 5         ##最大空闲连接数量, 默认: maxActive
+    testOnBorrow: true    ##访问前验证链接有效性, 默认: false
+    validationQuery: SELECT 1       ##验证数据库连接的有效性sql, 默认: null
+    validationInterval: 30000         ##验证数据库连接频率(毫秒), 默认: 30000
+    removeAbandoned: true           ##是否进行无用链接回收, 默认: false
+    removeAbandonedTimeout: 60    ##链接有效期,超时将被回收(秒), 默认: 60
+    
+##mybatis配置
+mybatis: 
+  config: classpath:mybatis.xml
+
+##服务配置
+server:
+  port: 80
+  
+##属性配置
+config:
+  domain: http://test.com  #本工程域名(用于支付回调,微信需要配置安全域)
+  authurl: http://test.com #微信授权服务地址
+  authkey: pay #调用微信授权服务的appkey
+  
+##支付帐号配置
+account: 
+  wx: #微信
+    appid: 
+    secret: 
+    mchid:   #商户号
+    mchkey:   #商户号密钥
+  ali: #支付宝
+    appid: 
+    secret: 
+
+##支付客户端配置
+appList: #业务类型列表
+  test: #订单标识(appkey)
+    title: 支付测试  #订单类型标题, 用于在第三方支付平台显示
+    notifyUrl: #支付成功后异步通知地址(post/可选)
+    returnUrl: #支付成功后同步回调地址(get/可选)
+    debug: true  ##是否测试状态(测试中支付金额为1分) 
+
+##日志配置
+logging:
+  level:
+    org:
+      springframework: INFO
